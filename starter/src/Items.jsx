@@ -6,7 +6,7 @@ const Items = () => {
   const { isLoading, data, isError, error } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
-      const { data } = await httpClient.get("/stuff");
+      const { data } = await httpClient.get("");
       return data;
     },
   });
