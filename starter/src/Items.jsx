@@ -3,15 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "./utils";
 
 const Items = ({ items }) => {
-  const res = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["tasks"],
-    queryFn: () => httpClient.get(""),
+    queryFn: async () => {
+      const { data } = await httpClient.get("");
+      return data;
+    },
   });
-  console.log(res.data);
+
+  if (isLoading) {
+    return <h4 style={{ marginTop: "2rem" }}>Loading...</h4>;
+  }
 
   return (
     <div className="items">
-      {items.map((item) => {
+      {data.taskList.map((item) => {
         return <SingleItem key={item.id} item={item} />;
       })}
     </div>
