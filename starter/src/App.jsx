@@ -12,17 +12,6 @@ const defaultItems = [
 ];
 
 const App = () => {
-  const fetchData = async () => {
-    try {
-      const res = await httpClient("");
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
   const [items, setItems] = useState(defaultItems);
   return (
     <section className="section-center">
