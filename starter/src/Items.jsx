@@ -2,7 +2,7 @@ import SingleItem from "./SingleItem";
 import { useQuery } from "@tanstack/react-query";
 import httpClient from "./utils";
 
-const Items = ({ items }) => {
+const Items = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
