@@ -15,8 +15,22 @@ const SingleItem = ({ item }) => {
     },
   });
 
+  const { mutate: deleteTask } = useMutation({
+    mutationFn: (id) => httpClient.delete(`/${id}`),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      toast.success(data.data.msg);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   const handleEdit = (id) => {
     updateTask(id);
+  };
+
+  const handleDelete = (id) => {
+    deleteTask(id);
   };
   return (
     <div className="single-item">
@@ -36,7 +50,7 @@ const SingleItem = ({ item }) => {
       <button
         className="btn remove-btn"
         type="button"
-        onClick={() => console.log("delete task")}
+        onClick={() => handleDelete(item.id)}
       >
         delete
       </button>
