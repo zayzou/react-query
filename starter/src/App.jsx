@@ -1,19 +1,32 @@
-import { ToastContainer } from 'react-toastify';
-import { nanoid } from 'nanoid';
-import Form from './Form';
-import Items from './Items';
-import { useState } from 'react';
+import { ToastContainer } from "react-toastify";
+import { nanoid } from "nanoid";
+import Form from "./Form";
+import Items from "./Items";
+import { useEffect, useState } from "react";
+import httpClient from "./utils";
 const defaultItems = [
-  { id: nanoid(), title: 'walk the dog', isDone: false },
-  { id: nanoid(), title: 'wash dishes', isDone: false },
-  { id: nanoid(), title: 'drink coffee', isDone: true },
-  { id: nanoid(), title: 'take a nap', isDone: false },
+  { id: nanoid(), title: "walk the dog", isDone: false },
+  { id: nanoid(), title: "wash dishes", isDone: false },
+  { id: nanoid(), title: "drink coffee", isDone: true },
+  { id: nanoid(), title: "take a nap", isDone: false },
 ];
+
 const App = () => {
+  const fetchData = async () => {
+    try {
+      const res = await httpClient("");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const [items, setItems] = useState(defaultItems);
   return (
-    <section className='section-center'>
-      <ToastContainer position='top-center' />
+    <section className="section-center">
+      <ToastContainer position="top-center" />
       <Form />
       <Items items={items} />
     </section>
